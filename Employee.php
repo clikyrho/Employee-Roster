@@ -1,23 +1,24 @@
 <?php
+// Employee.php
+require_once 'Person.php';
 
 abstract class Employee extends Person {
-    private $companyName;
+    private string $companyName;
 
-    public function __construct($companyName) {
+    public function __construct(string $name, string $address, int $age, string $companyName) {
+        parent::__construct($name, $address, $age);
         $this->companyName = $companyName;
     }
 
-    public function getCompanyName(){
-        return $this->companyName;
-    }
+    public function getCompanyName(): string { return $this->companyName; }
+    public function setCompanyName(string $companyName): void { $this->companyName = $companyName; }
 
-    public function setCompanyName($companyName){
-        $this->companyName = $companyName;
-    }
+    // Abstract method
+    abstract public function earnings(): float;
 
-    abstract public function earnings();
-
-    public function __toString(){
-        return $this->companyName;
+    // toString method
+    public function __toString(): string {
+        return parent::__toString() . ", Company: $this->companyName";
     }
 }
+?>
